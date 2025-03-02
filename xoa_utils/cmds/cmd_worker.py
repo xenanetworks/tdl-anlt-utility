@@ -155,7 +155,7 @@ class CmdWorker:
             response = format_error(error)
             success = False
         except driver_ex.XoaException as ee:
-            response = f"{type(ee).__name__}: Driver error.\n"
+            response = f"{type(ee).__name__}: Could not establish connection.\n"
             success = False
         except Exception as e:
             response = f"{type(e).__name__}: {getattr(e, 'msg', str(e))}\n"

@@ -1,4 +1,4 @@
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tdl-anlt-utility) [![PyPI](https://img.shields.io/pypi/v/tdl-anlt-utility)](https://pypi.python.org/pypi/tdl-anlt-utility) ![GitHub](https://img.shields.io/github/license/xenanetworks/tdl-anlt-utility) [![Documentation Status](https://readthedocs.com/projects/xena-networks-tdl-anlt-utility/badge/?version=latest)](https://docs.xenanetworks.com/projects/tdl-anlt-utility/en/latest/?badge=latest)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tdl-anlt-utility) [![PyPI](https://img.shields.io/pypi/v/tdl-anlt-utility)](https://pypi.python.org/pypi/tdl-anlt-utility) [![Documentation Status](https://readthedocs.com/projects/xena-networks-tdl-anlt-utility/badge/?version=latest)](https://docs.xenanetworks.com/projects/tdl-anlt-utility/en/latest/?badge=latest)
 
 # ANLT Utility
 

@@ -39,7 +39,7 @@ def main():
             "pdoc>=12.3.1",
             "pytest>=7.2.1",
             "psutil>=5.9.4",
-            "xoa-driver>=2.8.1",
+            "tdl-xoa-driver>=1.1.0",
             "pydantic>=2.6.4",
         ],
         classifiers=[
@@ -47,14 +47,13 @@ def main():
             "Intended Audience :: Developers",
             "Topic :: Software Development :: Libraries :: Python Modules",
             "License :: OSI Approved :: Apache Software License",
-            "Programming Language :: Python :: 3.8",
             "Programming Language :: Python :: 3.9",
             "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: 3.11",
             "Programming Language :: Python :: 3.12",
             "Programming Language :: Python :: 3.13",
         ],
-        python_requires=">=3.8",
+        python_requires=">=3.9",
     )
 
 

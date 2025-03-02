@@ -123,7 +123,7 @@ html_title = title
 # The path to the HTML logo image in the static path, or URL to the logo, or ''.
 # html_logo = './_static/xoa_logo.png'
 
-html_favicon = './_static/xoa_favicon_16.png'
+html_favicon = './_static/favicon.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -131,22 +131,6 @@ html_favicon = './_static/xoa_favicon_16.png'
 html_static_path = ['_static']
 html_css_files = ['xoa.css']
 
-# Theme config for Furo
-# html_show_copyright = True
-# html_show_sphinx = False
-# html_theme_options = {
-#     "light_logo": "tlc_c1.png",
-#     "dark_logo": "tlc_c1.png",
-#     "source_repository": "https://github.com/xenanetworks/open-automation-utilities",
-#     "light_css_variables": {
-#         "color-brand-primary": "#0076c0",
-#         "color-brand-content": "#0076c0",
-#     },
-#     "navigation_with_keys": True,
-# }
-# If true, the index is generated twice: once as a single page with all the entries, 
-# and once as one page per starting letter. Default is False.
-# html_split_index = True
 
 # Theme config for sphinx_rtd_theme
 html_show_sphinx =  False

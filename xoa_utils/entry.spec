@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='xena-anlt-utility-win-x64.1.0.0',
+    name='tdl-anlt-utility-win-x64.1.0.0',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
