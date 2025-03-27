@@ -378,10 +378,12 @@ async def log(ctx: ac.Context, filename: str, read: bool, keep: str, serdes: str
                     if _entry_value != None:
                         data = LogResultValueModel(**_entry_value)
                         for cmd in data.result.cmds:
-                            if cmd.result != None:
-                                log_log += f"cmd: {cmd.cmd}, result: {cmd.result}, prbs: bits={cmd.prbs[0].bits:} errors={cmd.prbs[0].errors} ber={_ber_styler(cmd.prbs[0].result)}, flags: {cmd.flags}\n{'':<37}"
-                            else:
-                                log_log += f"cmd: {cmd.cmd}"
+                            _result = cmd.result if cmd.result != None else ""
+                            _prbs_bits = cmd.prbs[0].bits if cmd.prbs != None else 0
+                            _prbs_errors = cmd.prbs[0].errors if cmd.prbs != None else 0
+                            _prbs_ber = cmd.prbs[0].result if cmd.prbs != None else "None"
+                            _flags = cmd.flags if cmd.flags != None else "None"
+                            log_log += f"cmd: {cmd.cmd}, result: {_result}, prbs: bits={_prbs_bits:} errors={_prbs_errors} ber={_ber_styler(_prbs_ber)}, flags: {_flags}\n{'':<37}"
                     else:
                         log_log = ""
                     b_str = f"{common:<32}{'MSG:':<5}{log_log}"
