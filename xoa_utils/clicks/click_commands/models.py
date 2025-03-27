@@ -12,6 +12,7 @@ import json
 class EntryDiscriminatorEnum(str, Enum):
     fsm = 'fsm'
     lt = 'lt'
+    lt_nrz  = 'lt_nrz'
     aneg_bp = 'aneg_bp'
     aneg_np = 'aneg_np'
     alg_result = 'alg_result'
@@ -65,7 +66,7 @@ class FSMEntryValueModel(BaseModel):
 class LTLogEntryValueModel(BaseModel):
     log: str
 
-# entry_discriminator: lt, entry_value.direction
+# entry_discriminator: lt, and nt_nrz entry_value.direction
 class LTControlModel(BaseModel):
     C_REQ: str
     C_SEL: str
@@ -78,20 +79,46 @@ class LTStatusModel(BaseModel):
     IC_STS: str
     PAM_MOD: str
 
+class LTNRZControlModel(BaseModel):
+    PRESET : str
+    INIT   : str
+    c_pre  : str
+    c_main : str
+    c_post : str
+
+class LTNRZStatusModel(BaseModel):
+    c_pre  : str
+    c_main : str
+    c_post : str
+
 class LTPktFieldModel(BaseModel):
     control: LTControlModel
     done: str
     locked: str
     status: LTStatusModel
 
+class LTNRZPktFieldModel(BaseModel):
+    control: LTNRZControlModel
+    done: str
+    status: LTNRZStatusModel
+
 class LTPktModel(BaseModel):
     fields: LTPktFieldModel
+    prev_count: str
+    value: str
+
+class LTNRZPktModel(BaseModel):
+    fields: LTNRZPktFieldModel
     prev_count: str
     value: str
 
 class LTEntryValueModel(BaseModel):
     direction: str
     pkt: LTPktModel
+
+class LTNRZEntryValueModel(BaseModel):
+    direction: str
+    pkt: LTNRZPktModel
 
 # entry_discriminator: aneg_bp, entry_value.log
 class AnegLogEntryValueModel(BaseModel):

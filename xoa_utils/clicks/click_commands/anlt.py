@@ -468,6 +468,23 @@ async def log(ctx: ac.Context, filename: str, read: bool, keep: str, serdes: str
 
                         b_str = f"{common:<32}{(log_direction + ':'):<14}{log_value}, LOCKED={log_pkt_locked}, TRAINED={log_pkt_done}\n{'':<37}{_flatten(log_pkt_ctrl)}\n{'':<37}{_flatten(log_pkt_status)}"
 
+                elif _entry_discriminator == EntryDiscriminatorEnum.lt_nrz.name:
+                    if "log" in _entry_value.keys():
+                        data = LTLogEntryValueModel(**_entry_value)
+                        log_log = data.log
+                        b_str = f"{common:<32}{'MSG:':<5}{log_log}"
+                    else:
+                        data = LTNRZEntryValueModel(**_entry_value)
+                        log_direction = _direction_styler(data.direction)
+                        log_value = data.pkt.value
+                        log_prev_count = data.pkt.prev_count
+
+                        log_pkt_done = _true_false_styler(data.pkt.fields.done)
+                        log_pkt_ctrl = data.pkt.fields.control.model_dump()
+                        log_pkt_status = data.pkt.fields.status.model_dump()
+
+                        b_str = f"{common:<32}{(log_direction + ':'):<14}{log_value}, TRAINED={log_pkt_done}\n{'':<37}{_flatten(log_pkt_ctrl)}\n{'':<37}{_flatten(log_pkt_status)}"
+
                 elif _entry_discriminator == EntryDiscriminatorEnum.log.name:
                     data = LogEntryValueModel(**_entry_value)
                     log_str = data.log
