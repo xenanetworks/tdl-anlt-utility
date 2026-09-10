@@ -595,6 +595,13 @@ async def strict(context: ac.Context, on: bool) -> str:
 @ac.option("-O", "--fsm-lt-algn1", help=h.HELP_LOG_CONTROL_FSM_LT_ALGN1_ON, is_flag=True)
 @ac.option("-o", "--no-fsm-lt-algn1", help=h.HELP_LOG_CONTROL_FSM_LT_ALGN1_OFF, is_flag=True)
 
+@ac.option("-Z", "--fsm-lt-nrz", help=h.HELP_LOG_CONTROL_FSM_LT_NRZ_ON, is_flag=True)
+@ac.option("-z", "--no-fsm-lt-nrz", help=h.HELP_LOG_CONTROL_FSM_LT_NRZ_OFF, is_flag=True)
+
+@ac.option("-Y", "--fsm-lt-coeff-nrz", help=h.HELP_LOG_CONTROL_FSM_LT_COEFF_NRZ_ON, is_flag=True)
+@ac.option("-y", "--no-fsm-lt-coeff-nrz", help=h.HELP_LOG_CONTROL_FSM_LT_COEFF_NRZ_OFF, is_flag=True)
+
+
 @ac.pass_context
 async def log_ctrl(
     context: ac.Context, 
@@ -610,6 +617,8 @@ async def log_ctrl(
     fsm_lt_stimuli: bool,
     fsm_lt_alg0: bool,
     fsm_lt_algn1: bool,
+    fsm_lt_nrz: bool,
+    fsm_lt_coeff_nrz: bool,
     no_debug: bool,
     no_an_trace: bool, 
     no_lt_trace: bool, 
@@ -622,6 +631,8 @@ async def log_ctrl(
     no_fsm_lt_stimuli: bool,
     no_fsm_lt_alg0: bool,
     no_fsm_lt_algn1: bool,
+    no_fsm_lt_nrz: bool,
+    no_fsm_lt_coeff_nrz: bool,
     ) -> str:
     storage: CmdContext = context.obj
     port_obj = storage.retrieve_port()
@@ -641,6 +652,8 @@ async def log_ctrl(
     _fsm_lt_stimuli = resp["fsm_lt_stimuli"]
     _fsm_lt_alg0 = resp["fsm_lt_alg0"]
     _fsm_lt_algn1 = resp["fsm_lt_algn1"]
+    _fsm_lt_nrz = resp["fsm_lt_nrz"]
+    _fsm_lt_coeff_nrz = resp["fsm_lt_coeff_nrz"]
 
     _debug = dominant_and_recessive(_debug, debug, no_debug)
     _an_trace = dominant_and_recessive(_an_trace, an_trace, no_an_trace)
@@ -654,6 +667,8 @@ async def log_ctrl(
     _fsm_lt_stimuli = dominant_and_recessive(_fsm_lt_stimuli, fsm_lt_stimuli, no_fsm_lt_stimuli)
     _fsm_lt_alg0 = dominant_and_recessive(_fsm_lt_alg0, fsm_lt_alg0, no_fsm_lt_alg0)
     _fsm_lt_algn1 = dominant_and_recessive(_fsm_lt_algn1, fsm_lt_algn1, no_fsm_lt_algn1)
+    _fsm_lt_nrz = dominant_and_recessive(_fsm_lt_nrz, fsm_lt_nrz, no_fsm_lt_nrz)
+    _fsm_lt_coeff_nrz = dominant_and_recessive(_fsm_lt_coeff_nrz, fsm_lt_coeff_nrz, no_fsm_lt_coeff_nrz)
 
     if _debug:
         types.append(AnLtLogControl.LOG_TYPE_DEBUG)
@@ -679,6 +694,10 @@ async def log_ctrl(
         types.append(AnLtLogControl.LOG_TYPE_FSM_LT_ALG0)
     if _fsm_lt_algn1:
         types.append(AnLtLogControl.LOG_TYPE_FSM_LT_ALG1)
+    if _fsm_lt_nrz:
+        types.append(AnLtLogControl.LOG_TYPE_FSM_LT_NRZ)
+    if _fsm_lt_coeff_nrz:
+        types.append(AnLtLogControl.LOG_TYPE_FSM_LT_COEFF_NRZ)
 
     await anlt_utils.anlt_log_control(port_obj, types)
     resp = await anlt_utils.anlt_log_control_get(port_obj)
@@ -695,5 +714,7 @@ async def log_ctrl(
         resp["fsm_lt_coeff"],
         resp["fsm_lt_stimuli"],
         resp["fsm_lt_alg0"],
-        resp["fsm_lt_algn1"]
+        resp["fsm_lt_algn1"],
+        resp["fsm_lt_nrz"],
+        resp["fsm_lt_coeff_nrz"]
         )

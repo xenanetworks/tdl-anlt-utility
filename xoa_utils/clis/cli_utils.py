@@ -423,22 +423,26 @@ def format_log_control(
         fsm_lt_coeff: bool,
         fsm_lt_stimuli: bool,
         fsm_lt_alg0: bool,
-        fsm_lt_algn1: bool
+        fsm_lt_algn1: bool,
+        fsm_lt_nrz: bool,
+        fsm_lt_coeff_nrz: bool
         ) -> str:
     return f"""
 Port {storage.retrieve_port_str()} log control:
-    Type debug:             {'on  -D' if debug else 'off -d'}
-    Type AN trace:          {'on  -A' if an_trace else 'off -a'}
-    Type LT trace:          {'on  -L' if lt_trace else 'off -l'}
-    Type ALG trace:         {'on  -G' if alg_trace else 'off -g'}
-    Type FSM port:          {'on  -P' if fsm_port else 'off -p'}
-    Type FSM AN:            {'on  -N' if fsm_an else 'off -n'}
-    Type FSM AN Stimuli:    {'on  -M' if fsm_an_stimuli else 'off -m'}
-    Type FSM LT:            {'on  -T' if fsm_lt else 'off -t'}
-    Type FSM LT Coeff:      {'on  -C' if fsm_lt_coeff else 'off -c'}
-    Type FSM LT Stimuli:    {'on  -S' if fsm_lt_stimuli else 'off -s'}
-    Type FSM LT ALG  0:     {'on  -Z' if fsm_lt_alg0 else 'off -z'}
-    Type FSM LT ALG -1:     {'on  -O' if fsm_lt_algn1 else 'off -o'}
+    Type debug:              {'on  -D' if debug else 'off -d'}
+    Type AN trace:           {'on  -A' if an_trace else 'off -a'}
+    Type LT trace:           {'on  -L' if lt_trace else 'off -l'}
+    Type ALG trace:          {'on  -G' if alg_trace else 'off -g'}
+    Type FSM port:           {'on  -P' if fsm_port else 'off -p'}
+    Type FSM AN:             {'on  -N' if fsm_an else 'off -n'}
+    Type FSM AN Stimuli:     {'on  -M' if fsm_an_stimuli else 'off -m'}
+    Type FSM LT (PAM4):      {'on  -T' if fsm_lt else 'off -t'}
+    Type FSM LT Coeff (PAM4) {'on  -C' if fsm_lt_coeff else 'off -c'}
+    Type FSM LT Stimuli:     {'on  -S' if fsm_lt_stimuli else 'off -s'}
+    Type FSM LT ALG  0:      {'on  -Z' if fsm_lt_alg0 else 'off -z'}
+    Type FSM LT ALG -1:      {'on  -O' if fsm_lt_algn1 else 'off -o'}
+    Type FSM LT (NRZ):       {'on  -Z' if fsm_lt_nrz else 'off -z'}
+    Type FSM LT Coeff (NRZ): {'on  -Y' if fsm_lt_coeff_nrz else 'off -y'}
 """
 
 def dominant_and_recessive(original: bool, dominant: bool, recessive: bool) -> bool:

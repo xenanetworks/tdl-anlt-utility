@@ -91,11 +91,11 @@ HELP_LOG_CONTROL_FSM_AN_OFF = "Autoneg FSM trace OFF"
 HELP_LOG_CONTROL_FSM_AN_STIMULI_ON = "Autoneg stimuli FSM trace ON"
 HELP_LOG_CONTROL_FSM_AN_STIMULI_OFF = "Autoneg stimuli FSM trace OFF"
 
-HELP_LOG_CONTROL_FSM_LT_ON = "Link Training FSM trace ON"
-HELP_LOG_CONTROL_FSM_LT_OFF = "Link Training FSM trace OFF"
+HELP_LOG_CONTROL_FSM_LT_ON = "PAM4 Link Training FSM trace ON"
+HELP_LOG_CONTROL_FSM_LT_OFF = "PAM4 Link Training FSM trace OFF"
 
-HELP_LOG_CONTROL_FSM_LT_COEFF_ON = "Link Training coefficient FSM trace ON"
-HELP_LOG_CONTROL_FSM_LT_COEFF_OFF = "Link Training coefficient FSM trace OFF"
+HELP_LOG_CONTROL_FSM_LT_COEFF_ON = "PAM4 Link Training coefficient FSM trace ON"
+HELP_LOG_CONTROL_FSM_LT_COEFF_OFF = "PAM4 Link Training coefficient FSM trace OFF"
 
 HELP_LOG_CONTROL_FSM_LT_STIMULI_ON = "Link Training stimuli FSM trace ON"
 HELP_LOG_CONTROL_FSM_LT_STIMULI_OFF = "Link Training stimuli FSM trace OFF"
@@ -105,3 +105,9 @@ HELP_LOG_CONTROL_FSM_LT_ALG0_OFF = "Link Training algorithm0 FSM trace OFF"
 
 HELP_LOG_CONTROL_FSM_LT_ALGN1_ON = "Link Training algorithmN1 FSM trace ON"
 HELP_LOG_CONTROL_FSM_LT_ALGN1_OFF = "Link Training algorithmN1 FSM trace OFF"
+
+HELP_LOG_CONTROL_FSM_LT_NRZ_ON = "NRZ Link Training FSM trace ON"
+HELP_LOG_CONTROL_FSM_LT_NRZ_OFF = "NRZ Link Training FSM trace OFF"
+
+HELP_LOG_CONTROL_FSM_LT_COEFF_NRZ_ON = "NRZ Link Training coefficient FSM trace ON"
+HELP_LOG_CONTROL_FSM_LT_COEFF_NRZ_OFF = "NRZ Link Training coefficient FSM trace OFF"
