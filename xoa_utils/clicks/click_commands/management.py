@@ -61,9 +61,9 @@ async def connect(
         this_port_dic = storage.obtain_physical_ports(id_str)
         for port_id, port_obj in this_port_dic.items():
             if force:
-                await mgmt_utils.reserve_port(port_obj, force)
+                await mgmt_utils.reserve_ports([port_obj], force)
             if reset:
-                await mgmt_utils.reset_port(port_obj)
+                await mgmt_utils.reset_ports([port_obj])
             port_serdes_num = (await anlt_utils.anlt_status(port_obj))["serdes_count"]
             storage.store_port(port_id, port_obj, port_serdes_num)
             if count == 0:
@@ -94,13 +94,13 @@ async def exit(context: ac.Context, reset: bool, release: bool) -> str:
     storage: CmdContext = context.obj
     for module_id, module_obj in storage.retrieve_modules().copy().items():
         if release:
-            await mgmt_utils.free_module(module_obj)
+            await mgmt_utils.release_modules([module_obj])
         storage.remove_module(module_id)
     for port_id, port_obj in storage.retrieve_ports().copy().items():
         if reset:
-            await mgmt_utils.reset_port(port_obj)
+            await mgmt_utils.reset_ports([port_obj])
         if release:
-            await mgmt_utils.free_port(port_obj)
+            await mgmt_utils.release_ports([port_obj])
         storage.remove_port(port_id)
 
     return ""
@@ -146,11 +146,11 @@ async def port(context: ac.Context, port: str, reset: bool, force: bool) -> str:
     tester_obj = storage.retrieve_tester()
 
     if force:
-        module_obj = mgmt_utils.get_module(tester_obj, int(module_id))
-        await mgmt_utils.free_module(module_obj)
-        await mgmt_utils.reserve_port(port_obj, force)
+        module_obj = mgmt_utils.obtain_module_by_id(tester_obj, module_id)
+        await mgmt_utils.release_modules([module_obj])
+        await mgmt_utils.reserve_ports([port_obj], force)
     if reset:
-        await mgmt_utils.reset_port(port_obj)
+        await mgmt_utils.reset_ports([port_obj])
     if force or reset:
         await asyncio.sleep(2)
         # status will change when you reserve_port or reset_port, need to wait
@@ -244,12 +244,12 @@ async def module_config(
     """
     storage: CmdContext = context.obj
     module_obj = storage.retrieve_module(str(module))
-    await mgmt_utils.set_module_media_config(
-        module_obj, MediaConfigurationType[media.upper()], force
-    )
-    await mgmt_utils.set_module_port_config(
-        module_obj, port_count, int(
-            port_speed.replace("g", "000")), force
+    await mgmt_utils.set_module_config(
+        module_obj, 
+        MediaConfigurationType[media.upper()], 
+        port_count,
+        int(port_speed.replace("g", "000")), 
+        force
     )
     storage.remove_ports()
     return ""

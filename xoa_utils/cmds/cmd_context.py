@@ -304,11 +304,13 @@ class CmdContext:
             raise NotConnectedError()
         m_dics = {}
         if id_str == "*":
-            for m in mgmt_utils.get_modules(tester):
+            # _module_list = await mgmt_utils.obtain_modules_by_ids(tester, ["*"])
+            for m in tester.modules:
                 m_dics[str(m.module_id)] = m
         else:
             module_id = id_str.split("/")[0]
-            m = mgmt_utils.get_module(tester, int(module_id))
+            # _module_list = await mgmt_utils.obtain_modules_by_ids(tester, [module_id])
+            m = tester.modules.obtain(int(module_id))
             m_dics[str(m.module_id)] = m
 
         if update:
@@ -325,8 +327,11 @@ class CmdContext:
         p_dics = {}
         if id_str == "*":
             m_id = p_id = -1
-            for i in mgmt_utils.get_all_ports(tester):
-                p_dics[f"{i.kind.module_id}/{i.kind.port_id}"] = i
+            for m in tester.modules:
+                for p in m.ports:
+                    p_dics[f"{p.kind.module_id}/{p.kind.port_id}"] = p
+            # for i in await mgmt_utils.obtain_ports_by_ids(tester, ["*"]):
+                # p_dics[f"{i.kind.module_id}/{i.kind.port_id}"] = i
         else:
             splitted = id_str.split("/")
             if len(splitted) == 1:
@@ -334,8 +339,11 @@ class CmdContext:
                 p_id = -1
                 try:
                     m_id = int(m_id)
-                    for i in mgmt_utils.get_ports(tester, m_id):
-                        p_dics[f"{i.kind.module_id}/{i.kind.port_id}"] = i
+                    _module = tester.modules.obtain(m_id)
+                    for p in _module.ports:
+                        p_dics[f"{p.kind.module_id}/{p.kind.port_id}"] = p
+                    # for i in await mgmt_utils.obtain_ports_by_ids(tester, [f"{m_id}/*"]):
+                    #     p_dics[f"{i.kind.module_id}/{i.kind.port_id}"] = i
                 except ValueError:
                     raise NoSuchIDError(id_str)
             elif len(splitted) == 2:
@@ -343,7 +351,7 @@ class CmdContext:
                 try:
                     m_id = int(m_id)
                     p_id = int(p_id)
-                    i = mgmt_utils.get_port(tester, m_id, p_id)
+                    i = tester.modules.obtain(m_id).ports.obtain(p_id)
                     p_dics[f"{i.kind.module_id}/{i.kind.port_id}"] = i
                 except ValueError:
                     raise NoSuchIDError(id_str)
