@@ -146,7 +146,7 @@ async def port(context: ac.Context, port: str, reset: bool, force: bool) -> str:
     tester_obj = storage.retrieve_tester()
 
     if force:
-        module_obj = mgmt_utils.obtain_module_by_id(tester_obj, module_id)
+        module_obj = await mgmt_utils.obtain_module_by_id(tester_obj, module_id)
         await mgmt_utils.release_modules([module_obj])
         await mgmt_utils.reserve_ports([port_obj], force)
     if reset:
